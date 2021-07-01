@@ -4,11 +4,11 @@ import { Document, Types } from 'mongoose';
 
 @Schema({ collection: 'restaurantOrders' })
 export class RestaurantOrders extends Document {
-  @Prop({required:true,unique: true})
+  @Prop({required:true})
   state: string;
 
-  @Prop({required:true, type: Object})
-  idRestaurant: { type: Types.ObjectId, ref: 'Restaurant'};
+  @Prop({required:true, type:Object})
+  restaurant: { type:Types.ObjectId, ref: 'Restaurant'};
 
   @Prop({required:true})
   tableNumber: number

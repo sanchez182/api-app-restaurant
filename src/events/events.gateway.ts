@@ -39,19 +39,8 @@ export class EventsGateway
   ): Promise<void> {
     console.log(payload); 
     const response = await this.eventService.setOrderState(payload);
-    this.server.sockets.to(payload.idRestaurant).emit('newOrder', response);
+    this.server.sockets.to(payload.restaurant).emit('newOrder', response);
   }
-
-  /*   @SubscribeMessage('orders')
-  async ordersRestaurant(
-    @ConnectedSocket() client: Socket,
-    @MessageBody() payload: any,
-  ): Promise<void> {
-    console.log(payload);
-    const theUid = client.handshake.query['uidClient'];
-    const response = await this.eventService.setOrderState(payload);
-    this.server.sockets.to(theUid).emit('orderChange', response);
-  } */
 
   afterInit(server: Server) {
     this.logger.log('Init');
